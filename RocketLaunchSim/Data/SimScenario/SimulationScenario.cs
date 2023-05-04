@@ -24,6 +24,7 @@ namespace RocketLaunchSim.Data.SimScenario
             this.velocity = velocity ?? Vector264.Zero;
         }
 
+        //Yeah, I know, this should really be its own class.
         public SimulationScenario(string path)
         {
             StreamReader reader = new (path);
@@ -32,17 +33,28 @@ namespace RocketLaunchSim.Data.SimScenario
             List<string> lines = new ();
             while (!reader.EndOfStream) 
             {
-                lines.Add(reader.ReadLine ());
-            }
-
-            //Split the line into its individual words
-            List<string[]> tokens = new ();
-            for (int i = 0; i < lines.Count; i++)
-            {
-                tokens.Add(lines[i].Split(' '));
+                lines.Add(reader.ReadLine() ?? "");
             }
 
             reader.Close();
+
+            //Split the line into its individual words
+            string[][] words = new string[lines.Count][];
+            for (int i = 0; i < lines.Count; i++)
+            {
+                words[i] = lines[i].Split(' ');
+            }
+
+            //Remove all the blank words generated above.
+            for (int i = 0; i < words.Length; i++)
+            {
+                //I don't like this for several reasons, but it was the first stack overflow response, and it's more concise than my original idea.
+                words[i] = words[i].Where(x => !string.IsNullOrEmpty(x)).ToArray();
+            }
+
+            //TODO: Combine as much of the above stuff as possible
+
+
         }
     }
 }
