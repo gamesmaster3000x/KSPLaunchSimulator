@@ -9,6 +9,8 @@ namespace RocketLaunchSim.Data.SimScenario
 {
     internal class Instruction
     {
+        public enum Controls { PITCH, AOA, THRUST, VELOCITY, VELOCITYH, VELOCITYV, ACCELERATION, ACCELERATIONH, ACCELERATIONV }
+
         public readonly Controls control;
         public readonly double setPoint;
     }

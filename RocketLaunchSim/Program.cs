@@ -2,6 +2,7 @@
 using System.Net.Security;
 using System.Numerics;
 using RocketLaunchSim.Data.Rocket;
+using RocketLaunchSim.Data.SimScenario;
 
 namespace RocketLaunchSim
 {
@@ -13,9 +14,9 @@ namespace RocketLaunchSim
 
             Rocket rocket = new(new Stage[]{ new Stage(1000000f, 13000f, 70000f, 323.72f)}); //A big kerbodyne tank with a vector engine.
 
-            Console.WriteLine("Starting simulation...");
+            Console.WriteLine("Enter the name of the file to load:");
 
-            Console.WriteLine( " ".Split(' ').Length);
+            new SimulationScenarioParser(Console.ReadLine());
         }
     }
 }
